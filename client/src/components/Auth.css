@@ -3,95 +3,152 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d0a0a 50%, #1a1a1a 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Boxing ring background effect */
+.auth-container::before {
+  content: '🥊';
+  position: absolute;
+  font-size: 300px;
+  opacity: 0.05;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
 }
 
 .auth-card {
-  background: white;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.2);
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
+  border: 3px solid #8B0000;
+  position: relative;
+}
+
+.auth-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #8B0000, #FFD700, #8B0000);
 }
 
 .auth-card h2 {
-  margin-bottom: 30px;
-  color: #333;
+  margin-bottom: 35px;
+  color: #FFD700;
   text-align: center;
+  font-size: 32px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 3px;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
-  color: #555;
-  font-weight: 500;
+  margin-bottom: 8px;
+  color: #FFD700;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
 }
 
 .form-group input {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 14px;
+  padding: 15px;
+  border: 2px solid #8B0000;
+  border-radius: 8px;
+  font-size: 16px;
   box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.95);
+  transition: all 0.3s;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #FFD700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  background: white;
 }
 
 .error-message {
-  background: #fee;
-  color: #c33;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 15px;
+  background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
   text-align: center;
+  font-weight: 600;
+  border: 2px solid #FFD700;
+  box-shadow: 0 0 15px rgba(220, 20, 60, 0.5);
 }
 
 .submit-btn {
   width: 100%;
-  padding: 12px;
-  background: #667eea;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: 600;
+  padding: 16px;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: #1a1a1a;
+  border: 3px solid #8B0000;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
 }
 
 .submit-btn:hover:not(:disabled) {
-  background: #5568d3;
+  background: linear-gradient(135deg, #FFA500 0%, #FFD700 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
 }
 
 .submit-btn:disabled {
-  background: #ccc;
+  background: #555;
+  border-color: #333;
   cursor: not-allowed;
+  box-shadow: none;
+  color: #888;
 }
 
 .switch-auth {
   text-align: center;
-  margin-top: 20px;
-  color: #666;
+  margin-top: 25px;
+  color: #ccc;
 }
 
 .link-btn {
   background: none;
   border: none;
-  color: #667eea;
+  color: #FFD700;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: underline;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s;
 }
 
 .link-btn:hover {
-  color: #5568d3;
+  color: #FFA500;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Boxing glove cursor effect */
+.submit-btn:not(:disabled),
+.link-btn {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="24" font-size="24">🥊</text></svg>'), pointer;
 }
