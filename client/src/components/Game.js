@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Game.css';
 
-function Game({ token }) {
+function Game({ token, onGameComplete }) {
   const [gameState, setGameState] = useState(null);
   const [deck, setDeck] = useState([]);
   const [fullDealerHand, setFullDealerHand] = useState([]);
@@ -123,6 +123,10 @@ function Game({ token }) {
           dealerScore: data.dealerScore
         })
       });
+      // Notify parent component that game is complete
+      if (onGameComplete) {
+        onGameComplete();
+      }
     } catch (error) {
       console.error('Error saving game:', error);
     }

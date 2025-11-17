@@ -3,11 +3,19 @@ import './App.css';
 import Login from './components/Login';
 import Register from './components/Register';
 import Game from './components/Game';
+import Stats from './components/Stats';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [user, setUser] = useState(null);
   const [showRegister, setShowRegister] = useState(false);
+  const [activeTab, setActiveTab] = useState('game');
+  const [statsKey, setStatsKey] = useState(0);
+
+  const handleGameComplete = () => {
+    // Force stats component to refresh by changing its key
+    setStatsKey(prev => prev + 1);
+  };
 
   const handleLogout = useCallback(() => {
     localStorage.removeItem('token');
@@ -66,7 +74,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Blackjack Game</h1>
+        <h1>🥊 Blackjack Arena</h1>
         {user && (
           <div className="user-info">
             <span>Welcome, {user.firstName} {user.lastName}!</span>
@@ -74,7 +82,27 @@ function App() {
           </div>
         )}
       </header>
-      <Game token={token} />
+      
+      <div className="tab-navigation">
+        <button 
+          className={`tab-btn ${activeTab === 'game' ? 'active' : ''}`}
+          onClick={() => setActiveTab('game')}
+        >
+          🎮 Play Game
+        </button>
+        <button 
+          className={`tab-btn ${activeTab === 'stats' ? 'active' : ''}`}
+          onClick={() => setActiveTab('stats')}
+        >
+          📊 Fight Record
+        </button>
+      </div>
+
+      {activeTab === 'game' ? (
+        <Game token={token} onGameComplete={handleGameComplete} />
+      ) : (
+        <Stats key={statsKey} token={token} />
+      )}
     </div>
   );
 }
