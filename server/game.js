@@ -207,4 +207,44 @@ const getHistory = (req, res) => {
   });
 };
 
-module.exports = { startGame, hit, stand, saveGame, getHistory };
+// Get lifetime statistics
+const getStats = (req, res) => {
+  const userId = req.userId;
+
+  const sql = `
+    SELECT
+      COUNT(*) as totalGames,
+      SUM(CASE WHEN result = 'win' THEN 1 ELSE 0 END) as wins,
+      SUM(CASE WHEN result = 'lose' THEN 1 ELSE 0 END) as losses,
+      SUM(CASE WHEN result = 'push' THEN 1 ELSE 0 END) as pushes,
+      ROUND(AVG(playerScore), 1) as avgPlayerScore,
+      ROUND(AVG(dealerScore), 1) as avgDealerScore,
+      MAX(playerScore) as highestScore,
+      MIN(playedAt) as firstGame,
+      MAX(playedAt) as lastGame
+    FROM game_history
+    WHERE userId = ?
+  `;
+
+  db.get(sql, [userId], (err, stats) => {
+    if (err) {
+      return res.status(500).json({ error: 'Failed to fetch statistics' });
+    }
+    
+    // Calculate win percentage
+    const winPercentage = stats.totalGames > 0
+      ? ((stats.wins / stats.totalGames) * 100).toFixed(1)
+      : 0;
+
+    res.json({
+      ...stats,
+      winPercentage,
+      wins: stats.wins || 0,
+      losses: stats.losses || 0,
+      pushes: stats.pushes || 0,
+      totalGames: stats.totalGames || 0
+    });
+  });
+};
+
+module.exports = { startGame, hit, stand, saveGame, getHistory, getStats };

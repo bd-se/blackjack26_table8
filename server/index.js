@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { register, login, verifyToken } = require('./auth');
-const { startGame, hit, stand, saveGame, getHistory } = require('./game');
+const { startGame, hit, stand, saveGame, getHistory, getStats } = require('./game');
 
 const app = express();
 const PORT = 5000;
@@ -21,6 +21,7 @@ app.post('/api/game/hit', verifyToken, hit);
 app.post('/api/game/stand', verifyToken, stand);
 app.post('/api/game/save', verifyToken, saveGame);
 app.get('/api/game/history', verifyToken, getHistory);
+app.get('/api/game/stats', verifyToken, getStats);
 
 // Get user info
 app.get('/api/user', verifyToken, (req, res) => {

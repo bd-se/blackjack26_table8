@@ -69,6 +69,47 @@
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
 }
 
+.tab-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 3px solid #8B0000;
+}
+
+.tab-btn {
+  padding: 15px 40px;
+  background: rgba(139, 0, 0, 0.3);
+  color: #FFD700;
+  border: 2px solid #8B0000;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 18px;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.tab-btn:hover {
+  background: rgba(139, 0, 0, 0.5);
+  border-color: #FFD700;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: #1a1a1a;
+  border-color: #FFD700;
+  box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+}
+
+.tab-btn.active:hover {
+  transform: translateY(-2px);
+}
+
 @media (max-width: 768px) {
   .App-header {
     flex-direction: column;
